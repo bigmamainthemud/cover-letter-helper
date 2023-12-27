@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+  <style>
+    /* Sidebar container styling */
+    body {
+      padding: 20px;
+    }
+
+    .sidebar-container {
+      background-color: #f8f9fa;
+      border-radius: 5px;
+      padding: 20px;
+    }
+
+    /* H2 styling */
+    h2 {
+      margin-top: 0;
+    }
+
+    /* Label and input styling */
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 0 0 10px;
+    }
+
+    /* Button styling */
+    button {
+      background-color: #007bff; /* Bootstrap primary color */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      /* margin: 10px 0 0; */
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('updateButton').addEventListener('click', () => {
+        console.log('button click event');
+
+        google.script.run.updateDocumentVars(
+          document.getElementById('companyName').value,
+          document.getElementById('jobTitle').value,
+          document.getElementById('contactName').value,
+          document.getElementById('jobSource').value
+        );
+      });
+
+    google.script.run.withSuccessHandler( (companyName, jobTitle, contactName, jobSource) => {
+      console.log('get variable values:', companyName, jobTitle, contactName, jobSource);
+
+      document.getElementById('companyName').value = companyName || 'company name';
+      document.getElementById('jobTitle').value = jobTitle || 'Frontend Developer';
+      document.getElementById('contactName').value = contactName || 'Hiring Manager';
+      document.getElementById('jobSource').value = jobSource || 'job source';
+    }).getVariableValues(['company_name', 'job_title', 'contact_name', 'job_source']);
+
+    });
+  </script>
+</head>
+<body>
+  <h2>Cover Letter Helper</h2>
+  <label for="companyName">Company Name:</label>
+  <input type="text" id="companyName" required placeholder="company name" value="company name">
+  <br>
+
+  <label for="jobTitle">Job Title:</label>
+  <input type="text" id="jobTitle" required placeholder="Frontend Developer" value="">
+  <br>
+
+  <label for="contactName">Contact Name:</label>
+  <input type="text" id="contactName" required placeholder="Hiring Manager" value="Hiring Manager">
+  <br>
+
+  <label for="jobSource">Job Source:</label>
+  <input type="text" id="jobSource" required placeholder="source" value="">
+  <br>
+
+  <button id="updateButton">Update Document</button>
+</body>
+</html>
