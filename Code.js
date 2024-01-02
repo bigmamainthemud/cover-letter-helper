@@ -8,9 +8,9 @@ function showSidebar() {
 function onOpen() {
   var ui = DocumentApp.getUi();
   var customMenu = ui.createMenu('Cover Letter Helper');
+  customMenu.addItem('Show Sidebar', 'showSidebar');
   customMenu.addItem('Reset Template', 'resetTemplate');
-  customMenu.addToUi();
-  showSidebar();
+  customMenu.addToUi();;
 }
 
 function resetTemplate() {
