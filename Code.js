@@ -10,6 +10,7 @@ function onOpen() {
   var customMenu = ui.createMenu('Cover Letter Helper');
   customMenu.addItem('Reset Template', 'resetTemplate');
   customMenu.addToUi();
+  showSidebar();
 }
 
 function resetTemplate() {
